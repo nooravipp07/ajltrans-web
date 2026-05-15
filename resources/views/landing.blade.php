@@ -15,6 +15,8 @@
     <meta name="author" content="AJL TRANS">
     <meta name="robots" content="index, follow">
 
+    <meta name="google-site-verification" content="B0D1h8uYgxkdHnjUwkmNAhfLHbPZrGpXadYaQ0Cu-VU" />
+
     <meta property="og:title" content="AJL Trans - Sewa Mobil Premium Bandung & Jakarta">
     <meta property="og:description" content="AJL Trans adalah penyedia layanan sewa mobil premium di Bandung dan Jakarta. Kami menyediakan armada terbaru dengan layanan profesional.">
     <meta property="og:type" content="website">
