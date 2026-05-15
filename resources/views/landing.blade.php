@@ -9,11 +9,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap" rel="stylesheet">
-    
+
+    <meta name="description" content="AJL Trans adalah penyedia layanan sewa mobil premium di Bandung dan Jakarta. Kami menyediakan armada terbaru dengan layanan profesional.">
+    <meta name="keywords" content="sewa mobil, rental mobil, sewa mobil bandung, city tour, travel, armada sewa mobil, layanan rental mobil, harga sewa mobil, booking sewa mobil, sewa mobil mewah, sewa mobil murah, sewa mobil lepas kunci, sewa mobil dengan sopir, sewa mobil harian, sewa mobil bulanan, sewa mobil untuk liburan, sewa mobil untuk bisnis, sewa mobil untuk acara, sewa mobil untuk pernikahan, sewa mobil untuk wisata, sewa mobil untuk keluarga, sewa mobil untuk grup, sewa mobil untuk kantor, sewa mobil untuk bandung, sewa mobil untuk jakarta, sewa mobil untuk luar kota, sewa mobil untuk antar jemput, sewa mobil untuk city tour, sewa mobil untuk travel, sewa mobil dengan harga terbaik, sewa mobil dengan armada terbaru, sewa mobil dengan layanan profesional">
+    <meta name="author" content="AJL TRANS">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="AJL Trans - Sewa Mobil Premium Bandung & Jakarta">
+    <meta property="og:description" content="AJL Trans adalah penyedia layanan sewa mobil premium di Bandung dan Jakarta. Kami menyediakan armada terbaru dengan layanan profesional.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('/images/logo-ajl.png') }}">
+
     <!-- Scripts & Styles -->
     @routes
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -23,15 +34,15 @@
     </style>
 </head>
 <body class="antialiased bg-background selection:bg-primary selection:text-white" x-data="landingPage()">
-    
+
     <!-- Navbar -->
-    <nav 
+    <nav
         :class="scrolled ? 'bg-white/80 backdrop-blur-md border-b border-slate-200 py-4' : 'bg-transparent py-6'"
         class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out"
     >
         <div class="container mx-auto px-4 md:px-6 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2">
-                <img :src="scrolled ? '{{ $cms['branding']['logo_dark']->value_id ?? '/images/logo-ajl.png' }}' : '{{ $cms['branding']['logo_light']->value_id ?? '/images/logo-ajl.png' }}'" 
+                <img :src="scrolled ? '{{ $cms['branding']['logo_dark']->value_id ?? '/images/logo-ajl.png' }}' : '{{ $cms['branding']['logo_light']->value_id ?? '/images/logo-ajl.png' }}'"
                      class="h-10 w-auto transition-all duration-300" alt="AJL Trans Logo">
             </a>
 
@@ -42,7 +53,7 @@
                 <a href="/#news" :class="scrolled ? 'text-slate-900 hover:text-primary' : 'text-white/80 hover:text-white'" class="text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors">Berita</a>
                 <a href="/#gallery" :class="scrolled ? 'text-slate-900 hover:text-primary' : 'text-white/80 hover:text-white'" class="text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors">Galeri</a>
                 <a href="/#contact" :class="scrolled ? 'text-slate-900 hover:text-primary' : 'text-white/80 hover:text-white'" class="text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors">Kontak</a>
-                
+
                 <!-- Language Switcher -->
                 <div class="flex items-center gap-2 border-l border-slate-300 pl-8 ml-2">
                     <a href="#" @click.prevent="setLang('id')" :class="currentLocale == 'id' ? 'text-primary font-bold' : (scrolled ? 'text-slate-400' : 'text-white/50')" class="text-sm uppercase transition-colors hover:text-primary">ID</a>
@@ -95,7 +106,7 @@
                 <h3 class="text-xl font-display font-bold text-slate-900">Mulai Perjalanan Anda</h3>
                 <p class="text-slate-500 text-sm">Pilih kategori layanan terlebih dahulu</p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                 <button @click="selectCategory('sewa_mobil')" :class="quickBooking.category === 'sewa_mobil' ? 'bg-primary text-white border-primary' : 'bg-slate-50 text-slate-600 border-slate-100 hover:bg-slate-100'" class="p-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -511,7 +522,7 @@
                     window.addEventListener('scroll', () => {
                         this.scrolled = window.pageYOffset > 60;
                     });
-                    
+
                     await this.fetchFleet();
                     this.initFadeUp();
                 },
@@ -561,7 +572,7 @@
 
                 getSelectedPrice(car) {
                     if (!car.pricings || car.pricings.length === 0) return '-';
-                    
+
                     const JAKARTA_MARKUP = 200000;
                     let city = this.quickBooking.city || 'bandung';
                     let type = this.quickBooking.service_type || (this.availableServiceTypes()[0]?.slug || 'lepas_kunci');
@@ -636,11 +647,11 @@
                     } else if (category === 'travel') {
                         url = `/booking/travel?city=${city}&type=${type}`;
                     }
-                    
+
                     if (url && vehicleId) {
                         url += (url.includes('?') ? '&' : '?') + `vehicle_id=${vehicleId}`;
                     }
-                    
+
                     if (url) window.location.href = url;
                 },
 
@@ -659,7 +670,7 @@
                     this.testimonialForm.loading = true;
                     this.testimonialForm.successMessage = '';
                     this.testimonialForm.errorMessage = '';
-                    
+
                     try {
                         const response = await fetch('/api/v1/testimonials', {
                             method: 'POST',
@@ -669,9 +680,9 @@
                             },
                             body: JSON.stringify(this.testimonialForm)
                         });
-                        
+
                         const data = await response.json();
-                        
+
                         if (response.ok) {
                             this.testimonialForm.successMessage = data.message;
                             this.testimonialForm.nama = '';
